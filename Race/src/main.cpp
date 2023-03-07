@@ -176,7 +176,6 @@ void setup()
   }
 
 
-  WebService::Instance().Init();
 
   for (byte i = 0; i < Players.Count(); ++i)
   {
