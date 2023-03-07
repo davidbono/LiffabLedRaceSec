@@ -19,7 +19,6 @@ namespace RaceConfig
     };
 
     extern bool RaceStarted;
-    extern bool EasyMode;
  
     extern word MaxLoops;
     extern word MaxLED;

@@ -148,7 +148,6 @@ void WebService::modifyGeneral( AsyncWebServerRequest *request)
 {
     MaxLED = request->getParam("MaxLED")->value().toInt();
     MaxLoops = request->getParam("MaxLoops")->value().toInt();
-    EasyMode = request->hasParam("EasyMode");
     track.updateLength(MaxLED);
 }
 
@@ -393,24 +392,6 @@ void WebService::buildIndexHTML()
         + getTimeString(CurrentRecord._time);
     }
 
-    if( strlen(EZAllTimeRecord._name) > 0 )
-    {
-        _index_html += "<h3>Easy Mode: All time track record</h3><b>"
-        + String(EZAllTimeRecord._name)
-        + "</b>: "
-        + getTimeString(EZAllTimeRecord._time)
-        + " for "
-        + getTimeString( millis() - EZAllTimeRecord._date);
-    }
-
-    if( strlen(EZCurrentRecord._name) > 0 )
-    {
-        _index_html += "<h3>Easy Mode: Last race record</h3><b>"
-        + String(EZCurrentRecord._name)
-        + "</b>: "
-        + getTimeString(EZCurrentRecord._time);
-    }
-
       _index_html +=   + R"rawliteral(
         <div class='w3-center'>
         <form action='/deleterecord'>
@@ -428,8 +409,8 @@ void WebService::buildIndexHTML()
         <br>
         Number of loops: <input type='text' name='MaxLoops' value=')rawliteral"
     + String(MaxLoops)
-    +"' size=2><br>"
-    + "<input type='checkbox' name='EasyMode' value='EasyMode'>Easy Mode<br>";
+    +"' size=2><br>";
+
 
     if(!RaceStarted)
     {
@@ -468,15 +449,6 @@ void WebService::buildBoardData()
     + "CurrentRecordName:" + String(CurrentRecord._name) + "\n" 
     + "CurrentRecordTime:" + getTimeString(CurrentRecord._time) + "\n"
     + "CurrentRecordColor:" + toString(CurrentRecord._color) + "\n"
-
-    + "EasyRecordName:" + String(EZAllTimeRecord._name) + "\n" 
-    + "EasyRecordTime:" + getTimeString(EZAllTimeRecord._time) + "\n"
-    + "EasyRecordColor:" + toString(EZAllTimeRecord._color) + "\n"
-    + "EasyRecordDuration:" + getTimeString(millis() - EZAllTimeRecord._date) + "\n"
-
-    + "EasyCurrentRecordName:" + String(EZCurrentRecord._name) + "\n" 
-    + "EasyCurrentRecordTime:" + getTimeString(EZCurrentRecord._time) + "\n"
-    + "EasyCurrentRecordColor:" + toString(EZCurrentRecord._color) + "\n"
 
     + "RaceStarted:" + (RaceStarted ? "1":"0") + "\n";
 }

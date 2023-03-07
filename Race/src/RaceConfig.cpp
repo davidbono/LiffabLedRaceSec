@@ -20,7 +20,6 @@ using namespace TimeUtils;
 namespace RaceConfig
 {
     bool RaceStarted = true;
-    bool EasyMode = false;
 
     word MaxLoops = DEFAULT_LOOPS;
     word MaxLED = DEFAULT_LED;
@@ -464,18 +463,8 @@ namespace RaceConfig
         Record* allTimeRecord = NULL;
         Record* currentRecord = NULL;
 
-        if( EasyMode )
-        {
-            allTimeRecord = &EZAllTimeRecord;
-            currentRecord = &EZCurrentRecord;
-            Serial.println("EasyMode was activated");
-                    }
-        else
-        {
-            allTimeRecord = &AllTimeRecord;
-            currentRecord = &CurrentRecord;
-            Serial.println("EasyMode was not activated");
-        }
+        allTimeRecord = &AllTimeRecord;
+        currentRecord = &CurrentRecord;
 
         int minutesRT = racetime / 60000;
         float secondsRT = (racetime - (minutesRT * 60000)) / 1000.f;

@@ -60,7 +60,9 @@ bool raceRunning = false;
 bool showingWinner = false;
 
 Controller StartRaceButton(PIN_START);
-Controller EasyModeSwitch(PIN_EASY);
+
+int wifiState;  
+
 
 LedLightingCoroutine trackLighting(&track);
 PlaySoundCoroutine audio;
@@ -135,6 +137,8 @@ void setup()
 {
   Serial.begin(115200);
 
+  pinMode(PIN_WIFI, INPUT_PULLUP); // set ESP32 pin to input pull-up mode
+
   raceRunning = false;
 
 #ifdef USE_SPIFFS
@@ -158,6 +162,19 @@ void setup()
     INIT_OBSTACLES
     Obstacles.Sort();
   }
+
+  wifiState = digitalRead(PIN_WIFI); 
+  if(wifiState == HIGH)
+  {
+    printf("WIFI activated");
+    WebService::Instance().Init();
+  }
+
+  if(wifiState == LOW)
+  {
+    printf("WIFI not activated");
+  }
+
 
   WebService::Instance().Init();
 
@@ -231,6 +248,8 @@ void loop()
   circleLighting.runCoroutine();
 #endif
 
+
+
   if (showingWinner)
   {
     if( trackLighting.isDone())
@@ -259,9 +278,6 @@ void loop()
         start_race();
       }
       StartRaceButton.Update();
-      
-      EasyMode = EasyModeSwitch.isPressed();
-      EasyModeSwitch.Update();
 
       for (byte i = 0; i < Players.Count(); ++i)
       {

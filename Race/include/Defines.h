@@ -20,7 +20,7 @@
 #define PIN_CIRCLE 17   //Pin to which the starting gate is connected
 
 #define PIN_START 16    //Optional button to start race
-#define PIN_EASY 15     //Optional switch for easy mode
+#define PIN_WIFI 4     //Optional switch to activate / deactivate wifi
 
 #define PIN_AUDIO 5     //Pin to which the audio speaker is connected
 

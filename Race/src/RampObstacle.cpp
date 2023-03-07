@@ -139,11 +139,6 @@ float RampObstacle::MoveUp(word left, word right, float position)
 {
     byte length = right - left;
     float acceleration = KG * _height * ((position - left) / length);
-
-    if( RaceConfig::EasyMode )
-    {
-        acceleration *= 0.5f;
-    }
     
     return -acceleration;
 }
