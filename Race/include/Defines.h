@@ -50,8 +50,8 @@
 #define COLOR_P4 Adafruit_NeoPixel::Color(127, 127, 127)
 
 #define LIGHT_PIN_P1 14 //PIN of the player 1 button lights
-#define LIGHT_PIN_P2 26 //PIN of the player 2 button lights
-#define LIGHT_PIN_P3 33 //PIN of the player 3 button lights
+#define LIGHT_PIN_P2 33 //PIN of the player 2 button lights
+#define LIGHT_PIN_P3 26 //PIN of the player 3 button lights
 #define LIGHT_PIN_P4 19 //PIN of the player 4 button lights
 
 #define INIT_PLAYERS                                           \
